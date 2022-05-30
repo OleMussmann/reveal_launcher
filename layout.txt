@@ -1,0 +1,23 @@
+browse PATH open
+
+# button place files (reveal.js folder, files folder etc.)
+# toggle overwrite index.html? (confirm dialogue)
+# toggle overwrite files? (confirm dialogue)
+# toggle livereload
+# serve
+# serve & open browser
+# stop serve
+
+toggle generate index.html
+
+expert options
+radio buttons reveal version
+checkboxes plugins
+port
+
+text title (can differ from actual title, e.g.: This Conference 2022)
+text description (SEO)
+text presentation author (can differ from authors on the title slide)
+
+
+URL

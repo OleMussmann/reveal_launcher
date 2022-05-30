@@ -1,0 +1,71 @@
+Name: Jinja2
+Version: 3.1.2
+Summary: A very fast and expressive template engine.
+Home-page: https://palletsprojects.com/p/jinja/
+Author: Armin Ronacher
+Author-email: armin.ronacher@active-4.com
+License: BSD-3-Clause
+---
+Name: livereload
+Version: 2.6.3
+Summary: Python LiveReload is an awesome tool for web developers
+Home-page: https://github.com/lepture/python-livereload
+Author: Hsiaoming Yang
+Author-email: me@lepture.com
+License: BSD
+---
+Name: MarkupSafe
+Version: 2.1.1
+Summary: Safely add untrusted strings to HTML/XML markup.
+Home-page: https://palletsprojects.com/p/markupsafe/
+Author: Armin Ronacher
+Author-email: armin.ronacher@active-4.com
+License: BSD-3-Clause
+---
+Name: pip
+Version: 22.0.4
+Summary: The PyPA recommended tool for installing Python packages.
+Home-page: https://pip.pypa.io/
+Author: The pip developers
+Author-email: distutils-sig@python.org
+License: MIT
+---
+Name: setuptools
+Version: 62.1.0
+Summary: Easily download, build, install, upgrade, and uninstall Python packages
+Home-page: https://github.com/pypa/setuptools
+Author: Python Packaging Authority
+Author-email: distutils-sig@python.org
+License: MIT
+---
+Name: six
+Version: 1.16.0
+Summary: Python 2 and 3 compatibility utilities
+Home-page: https://github.com/benjaminp/six
+Author: Benjamin Peterson
+Author-email: benjamin@python.org
+License: MIT
+---
+Name: tornado
+Version: 6.1
+Summary: Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed.
+Home-page: http://www.tornadoweb.org/
+Author: Facebook
+Author-email: python-tornado@googlegroups.com
+License: http://www.apache.org/licenses/LICENSE-2.0
+---
+Name: watchdog
+Version: 2.1.8
+Summary: Filesystem events monitoring
+Home-page: https://github.com/gorakhargosh/watchdog
+Author: Yesudeep Mangalapilly
+Author-email: yesudeep@gmail.com
+License: Apache License 2.0
+---
+Name: wheel
+Version: 0.37.1
+Summary: A built-package format for Python
+Home-page: https://github.com/pypa/wheel
+Author: Daniel Holth
+Author-email: dholth@fastmail.fm
+License: MIT

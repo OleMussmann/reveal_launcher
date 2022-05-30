@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+watchdog = "*"
+jinja2 = "*"
+livereload = "*"
+tkfontawesome = "*"
+tkinter-tooltip = "*"
+nuitka = "*"
+setuptools = "*"
+setuptools-scm = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
