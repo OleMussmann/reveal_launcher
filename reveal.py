@@ -54,6 +54,10 @@ def cli_args() -> argparse.Namespace:
 
 def launched_from_terminal() -> bool:
     # https://stackoverflow.com/questions/9839240/how-to-determine-if-python-script-was-run-via-command-line
+    if sys.stdin:
+        print("is a tty? ", sys.stdin.isatty())
+    else:
+        print("not a tty")
     return sys.stdin and sys.stdin.isatty()
 
 
@@ -161,6 +165,8 @@ def run_gui(args: argparse.Namespace, config: Dict[str, Any]) -> None:
             content_files = [x for x in all_files if x != "index.html"
                              and x.endswith(".html") or x.endswith(".md")]
             content_files.sort()
+            print("content files: ", content_files)
+            print("title slide: ", content_files[0])
             return content_files[0]
 
         def read_metadata(self) -> Dict[str, str]:
