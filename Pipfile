@@ -7,8 +7,11 @@ name = "pypi"
 livereload = "*"
 jinja2 = "*"
 watchdog = "*"
+yaml2 = "*"
 
 [dev-packages]
+nuitka = "*"
+ordered-set = "*"
 
 [requires]
 python_version = "3.9"
