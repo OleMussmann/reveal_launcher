@@ -1,5 +1,3 @@
-- attribution
-  - fontawesome
 - error handling for user text input
 - error handling for title md file formating errors
 - documentation
