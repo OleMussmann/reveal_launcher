@@ -11,6 +11,5 @@ python3 -m nuitka \
   --include-data-dir=./theme=theme \
   --include-data-files=azure.tcl=./ \
   --include-data-files=livereload.js=livereload/vendors/livereload.js \
-  --enable-plugin=tk-inter \
   --onefile --standalone --remove-output \
   -o reveal_macos reveal.py
