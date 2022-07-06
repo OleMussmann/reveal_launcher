@@ -1,0 +1,20 @@
+default_port: 8000
+
+warning_color: red
+
+all_plugins:
+  RevealHighlight: "Syntax highlighted code"
+  RevealMarkdown: "Write content using Markdown"
+  RevealMenu: "Menu for slide navigation,\nuse the burger menu on the bottom left"
+  RevealNotes: "Show a speaker view in a separate window,\nuse 'S' to summon"
+  RevealSearch: "Press CTRL+Shift+F to search slide content"
+  RevealZoom: "ALT+click to zoom on elements\n(CTRL+click for Linux)"
+
+reveal_specs:
+  4.3.1:
+    - RevealHighlight
+    - RevealMarkdown
+    - RevealMenu
+    - RevealNotes
+    - RevealSearch
+    - RevealZoom
