@@ -13,18 +13,18 @@ PORT = 8000
 FOLDER = os.getcwd()
 
 
-def refresh_template(template_name, running_refreshing):
+def refresh_template(template_name, running_refreshing, path):
     if running_refreshing.is_set():
         print("BUSY HERE!")
         return
     running_refreshing.set()
-    all_files = os.listdir(FOLDER)
+    all_files = os.listdir(path)
     content_files = [x for x in all_files if x != "index.html" and x.endswith(".html") or x.endswith(".md")]
     content_files.sort()
 
     settings = {}
 
-    first_file = content_files[0]
+    first_file = os.path.join(path, content_files[0])
     with open(first_file) as f:
         while True:
             line = f.readline().strip()
@@ -59,23 +59,25 @@ def refresh_template(template_name, running_refreshing):
     running_refreshing.clear()
 
 class Handler(FileSystemEventHandler):
-    def __init__(self, running_refreshing, template_name):
+    def __init__(self, running_refreshing, template_name, path):
         self.running_refreshing = running_refreshing
         self.template_name = template_name
+        self.path = path
 
     def on_any_event(self, event):
         if not event.is_directory and \
                 (event.src_path.endswith(".md") \
                 or event.src_path.endswith(".html") \
                 and not event.src_path.endswith("index.html")):
-            refresh_template(self.template_name, self.running_refreshing)
+            refresh_template(self.template_name, self.running_refreshing,
+                             self.path)
 
 def watch_for_changes(path, template_name, running_watch, running_refreshing):
     print("Running conversion once")
-    refresh_template(template_name, running_refreshing)
+    refresh_template(template_name, running_refreshing, path)
     print("Watching for changes")
     observer = Observer()
-    handler = Handler(running_refreshing, template_name)
+    handler = Handler(running_refreshing, template_name, path)
     observer.schedule(handler, path, recursive=True)
     observer.start()
     try:

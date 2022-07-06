@@ -70,9 +70,10 @@ def run_cli(args: argparse.Namespace, config: Dict[str, Any]) -> None:
 
     running_refreshing = threading.Event()
 
+    template_file = os.path.join(BASE_DIRECTORY, "nlesc.template")
     watching = threading.Thread(target=watch_for_changes,
                                 args=(args.folder,
-                                      "nlesc.template",
+                                      template_file,
                                       running_watch,
                                       running_refreshing),
                                 daemon=True)
@@ -123,11 +124,11 @@ def run_gui(args: argparse.Namespace, config: Dict[str, Any]) -> None:
             self.server = livereload.Server()
             self.running_watch = threading.Event()
             self.running_refreshing = threading.Event()
+            if app.state.get() == "valid path":
+                self.use_folder()
 
         def run(self):
             print("run from outside")
-            self.place_reveal_folder()
-            self.place_sample_files()
             self.write_to_title_slide()
             self.server.watch(app.presentation_path.get())
             self.running_watch.set()
@@ -163,13 +164,21 @@ def run_gui(args: argparse.Namespace, config: Dict[str, Any]) -> None:
             app.description_string.set(metadata_dict["description"])
             app.author_string.set(metadata_dict["author"])
 
+        def use_folder(self):
+            print("using folder from outsite")
+            self.place_reveal_folder()
+            self.place_sample_files()
+            self.refresh_metadata()
+
         def get_title_slide(self):
             presentation_path: str = app.presentation_path.get()
             all_files: List[str] = os.listdir(presentation_path)
             content_files = [x for x in all_files if x != "index.html"
                              and x.endswith(".html") or x.endswith(".md")]
             content_files.sort()
-            return os.path.join(presentation_path, content_files[0])
+            title_slide: str = os.path.join(presentation_path,
+                                            content_files[0])
+            return title_slide
 
         def read_metadata(self) -> Dict[str, str]:
             title_slide: str = self.get_title_slide()
@@ -275,10 +284,10 @@ def run_gui(args: argparse.Namespace, config: Dict[str, Any]) -> None:
 
     logic = Logic()
     app.logic = logic
-    try:
-        app.logic.refresh_metadata()
-    except IndexError:
-        print("No files yet, skipping")
+    #try:
+    #    app.logic.()
+    #except IndexError:
+    #    print("No files yet, skipping")
 
     root.mainloop()
 
