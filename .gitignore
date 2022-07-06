@@ -2,5 +2,5 @@
 *.bak
 __pycache__
 index.html
-reveal
+reveal_linux
 .mypy_cache
