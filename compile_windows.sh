@@ -1,6 +1,6 @@
 #!/bin/bash
 
-python3 -m nuitka \
+yes Yes | python3 -m nuitka \
   --include-data-files=*.md=./ \
   --include-data-files=*.html=./ \
   --include-data-dir=./files=files \
