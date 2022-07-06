@@ -76,6 +76,7 @@ class ToolTip(tk.Toplevel):
         self.y_offset = y_offset
         # visibility status of the ToolTip inside|outside|visible
         self.status = "outside"
+        self.enabled = True
         self.last_moved = 0
         # use Message widget to host ToolTip
         tk.Message(self, textvariable=self.msgVar, aspect=1000, **message_kwargs).grid()
@@ -105,7 +106,8 @@ class ToolTip(tk.Toplevel):
         self.geometry(f"+{event.x_root + self.x_offset}+{event.y_root + self.y_offset}")
 
         # Time is integer and in milliseconds
-        self.after(int(self.delay * 1000), self._show)
+        if self.enabled:
+            self.after(int(self.delay * 1000), self._show)
 
     def on_leave(self, event=None) -> None:
         """
