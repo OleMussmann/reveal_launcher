@@ -7,7 +7,7 @@ on:
       - "v*.*.*"
 
 jobs:
-  ubuntu-20.04:
+  ubuntu-20-04:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v3
@@ -38,7 +38,7 @@ jobs:
       with:
         files: reveal_ubuntu-20.04
 
-  ubuntu-18.04:
+  ubuntu-18-04:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v3
@@ -69,7 +69,7 @@ jobs:
       with:
         files: reveal_ubuntu-18.04
 
-  macos-big-sur:
+  macos-big-sur-11:
     runs-on: macOS-11
     steps:
     - uses: actions/checkout@v3
@@ -100,7 +100,7 @@ jobs:
       with:
         files: reveal_macos-big-sur-11
 
-  macos-catalina:
+  macos-catalina-10-15:
     runs-on: macOS-10.15
     steps:
     - uses: actions/checkout@v3
