@@ -71,7 +71,10 @@ def run_cli(args: argparse.Namespace, config: Dict[str, Any]) -> None:
     running_refreshing = threading.Event()
 
     watching = threading.Thread(target=watch_for_changes,
-                                args=(args.folder, running_watch, running_refreshing),
+                                args=(args.folder,
+                                      "nlesc.template",
+                                      running_watch,
+                                      running_refreshing),
                                 daemon=True)
     watching.start()
 
@@ -161,13 +164,12 @@ def run_gui(args: argparse.Namespace, config: Dict[str, Any]) -> None:
             app.author_string.set(metadata_dict["author"])
 
         def get_title_slide(self):
-            all_files: List[str] = os.listdir(app.presentation_path.get())
+            presentation_path: str = app.presentation_path.get()
+            all_files: List[str] = os.listdir(presentation_path)
             content_files = [x for x in all_files if x != "index.html"
                              and x.endswith(".html") or x.endswith(".md")]
             content_files.sort()
-            print("content files: ", content_files)
-            print("title slide: ", content_files[0])
-            return content_files[0]
+            return os.path.join(presentation_path, content_files[0])
 
         def read_metadata(self) -> Dict[str, str]:
             title_slide: str = self.get_title_slide()
