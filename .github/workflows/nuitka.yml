@@ -7,8 +7,8 @@ on:
       - "v*.*.*"
 
 jobs:
-  linux:
-    runs-on: ubuntu-latest
+  ubuntu-20.04:
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v3
 
@@ -24,16 +24,53 @@ jobs:
     - name: Build with nuitka
       run: ./compile_linux.sh
 
+    - name: Rename
+      run: mv reveal_linux reveal_ubuntu-20.04
+
+    - name: Make executable
+      run: chmod a+x reveal_ubuntu-20.04
+
     - name: Run tests
       run: echo "TODO implement tests"
 
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        files: reveal_linux
+        files: reveal_ubuntu-20.04
 
-  mac:
-    runs-on: macOS-latest
+  ubuntu-18.04:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Python 3.9.13
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.9.13
+
+    - name: Install dependencies
+      run: |
+        pip3 install -r requirements.txt
+
+    - name: Build with nuitka
+      run: ./compile_linux.sh
+
+    - name: Rename
+      run: mv reveal_linux reveal_ubuntu-18.04
+
+    - name: Make executable
+      run: chmod a+x reveal_ubuntu-18.04
+
+    - name: Run tests
+      run: echo "TODO implement tests"
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: reveal_ubuntu-18.04
+
+  macos-big-sur:
+    runs-on: macOS-11
     steps:
     - uses: actions/checkout@v3
 
@@ -49,13 +86,50 @@ jobs:
     - name: Build with nuitka
       run: ./compile_macos.sh
 
+    - name: Rename
+      run: mv reveal_macos reveal_macos-big-sur-11
+
+    - name: Make executable
+      run: chmod a+x reveal_macos-big-sur-11
+
     - name: Run tests
       run: echo "TODO implement tests"
 
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        files: reveal_macos
+        files: reveal_macos-big-sur-11
+
+  macos-catalina:
+    runs-on: macOS-10.15
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install Python 3.9.6 using Conda
+      run: |
+        sudo chown -R $USER $CONDA
+        $CONDA/bin/conda install python=3.9.6
+
+    - name: Install dependencies
+      run: |
+        pip3 install -r requirements.txt
+
+    - name: Build with nuitka
+      run: ./compile_macos.sh
+
+    - name: Rename
+      run: mv reveal_macos reveal_macos-catalina-10.15
+
+    - name: Make executable
+      run: chmod a+x reveal_macos-catalina-10.15
+
+    - name: Run tests
+      run: echo "TODO implement tests"
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: reveal_macos-catalina-10.15
 
   windows:
     runs-on: windows-latest
