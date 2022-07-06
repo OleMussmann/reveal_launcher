@@ -20,20 +20,7 @@ jobs:
         pip3 install -r requirements.txt
 
     - name: Build with nuitka
-      run: python3 -m nuitka \
-        --include-data-files=*.md=./ \
-        --include-data-files=*.html=./ \
-        --include-data-dir=./files=files \
-        --include-data-dir=./reveal.js=reveal.js \
-        --include-data-files=nlesc.template=./ \
-        --include-data-files=config.yaml=./ \
-        --include-data-files=tooltip.py=./ \
-        --include-data-dir=./theme=theme \
-        --include-data-files=azure.tcl=./ \
-        --include-data-files=livereload.js=livereload/vendors/livereload.js \
-        --enable-plugin=tk-inter \
-        --onefile --standalone --remove-output \
-        -o reveal reveal.py
+      run: ./compile_linux.sh
 
     - name: Run tests
       run: echo "TODO implement tests"
@@ -53,20 +40,7 @@ jobs:
         pip3 install -r requirements.txt
 
     - name: Build with nuitka
-      run: python3 -m nuitka \
-        --include-data-files=*.md=./ \
-        --include-data-files=*.html=./ \
-        --include-data-dir=./files=files \
-        --include-data-dir=./reveal.js=reveal.js \
-        --include-data-files=nlesc.template=./ \
-        --include-data-files=config.yaml=./ \
-        --include-data-files=tooltip.py=./ \
-        --include-data-dir=./theme=theme \
-        --include-data-files=azure.tcl=./ \
-        --include-data-files=livereload.js=livereload/vendors/livereload.js \
-        --enable-plugin=tk-inter \
-        --onefile --standalone --remove-output \
-        -o reveal reveal.py
+      run: ./compile_macos.sh
 
     - name: Run tests
       run: echo "TODO implement tests"
@@ -92,20 +66,7 @@ jobs:
 
     - name: Build with nuitka
       shell: bash
-      run: python3 -m nuitka \
-        --include-data-files=*.md=./ \
-        --include-data-files=*.html=./ \
-        --include-data-dir=./files=files \
-        --include-data-dir=./reveal.js=reveal.js \
-        --include-data-files=nlesc.template=./ \
-        --include-data-files=config.yaml=./ \
-        --include-data-files=tooltip.py=./ \
-        --include-data-dir=./theme=theme \
-        --include-data-files=azure.tcl=./ \
-        --include-data-files=livereload.js=livereload/vendors/livereload.js \
-        --enable-plugin=tk-inter \
-        --onefile --standalone --remove-output \
-        -o reveal reveal.py
+      run: ./compile_windows.sh
 
     - name: Run tests
       shell: bash

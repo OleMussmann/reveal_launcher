@@ -13,4 +13,4 @@ python3 -m nuitka \
   --include-data-files=livereload.js=livereload/vendors/livereload.js \
   --enable-plugin=tk-inter \
   --onefile --standalone --remove-output \
-  -o reveal reveal.py
+  -o reveal_linux reveal.py
