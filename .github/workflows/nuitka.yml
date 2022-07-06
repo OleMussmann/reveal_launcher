@@ -1,0 +1,112 @@
+name: Nuitka compile
+
+on:
+  push:
+    branches: compile
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Python 3.9.6
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.9.6
+
+    - name: Install dependencies
+      run: |
+        pip3 install -r requirements.txt
+
+    - name: Build with nuitka
+      run: python3 -m nuitka \
+        --include-data-files=*.md=./ \
+        --include-data-files=*.html=./ \
+        --include-data-dir=./files=files \
+        --include-data-dir=./reveal.js=reveal.js \
+        --include-data-files=nlesc.template=./ \
+        --include-data-files=config.yaml=./ \
+        --include-data-files=tooltip.py=./ \
+        --include-data-dir=./theme=theme \
+        --include-data-files=azure.tcl=./ \
+        --include-data-files=livereload.js=livereload/vendors/livereload.js \
+        --enable-plugin=tk-inter \
+        --onefile --standalone --remove-output \
+        -o reveal reveal.py
+
+    - name: Run tests
+      run: echo "TODO implement tests"
+
+  mac:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install Python 3.9.6 using Conda
+      run: |
+        sudo chown -R $USER $CONDA
+        $CONDA/bin/conda install python=3.9.6
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Build with nuitka
+      run: python3 -m nuitka \
+        --include-data-files=*.md=./ \
+        --include-data-files=*.html=./ \
+        --include-data-dir=./files=files \
+        --include-data-dir=./reveal.js=reveal.js \
+        --include-data-files=nlesc.template=./ \
+        --include-data-files=config.yaml=./ \
+        --include-data-files=tooltip.py=./ \
+        --include-data-dir=./theme=theme \
+        --include-data-files=azure.tcl=./ \
+        --include-data-files=livereload.js=livereload/vendors/livereload.js \
+        --enable-plugin=tk-inter \
+        --onefile --standalone --remove-output \
+        -o reveal reveal.py
+
+    - name: Run tests
+      run: echo "TODO implement tests"
+
+  windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Python 3.9.6
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.9.6
+
+    - name: Install MinGW using Conda
+      shell: bash
+      run: $CONDA/Scripts/conda install m2w64-gcc libpython
+
+    - name: Install dependencies with pipenv
+      shell: bash
+      run: |
+        pip install -r requirements.txt
+
+    - name: Build with nuitka
+      shell: bash
+      run: python3 -m nuitka \
+        --include-data-files=*.md=./ \
+        --include-data-files=*.html=./ \
+        --include-data-dir=./files=files \
+        --include-data-dir=./reveal.js=reveal.js \
+        --include-data-files=nlesc.template=./ \
+        --include-data-files=config.yaml=./ \
+        --include-data-files=tooltip.py=./ \
+        --include-data-dir=./theme=theme \
+        --include-data-files=azure.tcl=./ \
+        --include-data-files=livereload.js=livereload/vendors/livereload.js \
+        --enable-plugin=tk-inter \
+        --onefile --standalone --remove-output \
+        -o reveal reveal.py
+
+    - name: Run tests
+      shell: bash
+      run: echo "TODO implement tests"
