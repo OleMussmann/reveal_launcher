@@ -1,0 +1,33 @@
+- attribution
+  - fontawesome
+- error handling for user text input
+- error handling for title md file formating errors
+- documentation
+  - folder must exist :-/
+- fill help tab
+- remember plugin and version settings, if applicable
+  - pull from 00 slide
+- safeguard index.html, reveal.js folder edits
+  - add feature to keep index.html
+- grey out "Run" when ports are wrong
+- fonts are sometimes inconsistent
+- add more templates
+- bug: slides blink after first load
+- github actions for compilation
+- type hinting everywhere
+- code clean-up
+- missing cli options
+- bug: browser caching issues
+- reveal chart colors
+- add plugins
+  - seminar
+  - poll
+  - chart
+- tests
+- "Available Templates" not stretching horizontally
+- Check vertical stretching for "reveal.js Version" and "Available Templates"
+- Helpful button tooltip if "Open Browser" is disabled
+- document tooltip.py changes (self.enabled, allow for dismissal)
+
+- repo for demo
+- repo for template
