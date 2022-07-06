@@ -7,7 +7,7 @@ name = "pypi"
 livereload = "*"
 jinja2 = "*"
 watchdog = "*"
-yaml2 = "*"
+pyyaml = "*"
 
 [dev-packages]
 nuitka = "*"
