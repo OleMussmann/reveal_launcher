@@ -197,8 +197,8 @@ class Gui(ttk.Frame):
         def stop(self):
             print("stop")
 
-        def use_folder(self):
-            print("using folder")
+        def refresh_metadata(self):
+            print("refreshing metadata")
 
     def refresh_plugin_checkboxes(self) -> None:
         plugin_checkbox: ttk.Checkbutton
@@ -244,7 +244,7 @@ class Gui(ttk.Frame):
             self.url_button.configure(style="TButton")
             self.use_button["state"] = "enabled"
             print("valid path")
-            self.logic.use_folder()
+            self.logic.refresh_metadata()
         if self.state.get() == "serving":
             self.use_button.configure(style="TButton")
             self.url_button.configure(style="Accent.TButton")

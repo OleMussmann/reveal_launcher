@@ -39,7 +39,8 @@ def refresh_template(template_name, running_refreshing, path):
 
     slides = ""
     for content_file in content_files:
-        with open(content_file) as f:
+        content_file_full_path = os.path.join(path, content_file)
+        with open(content_file_full_path) as f:
             content = "".join(f.readlines())
         if content_file.endswith(".html"):
             slides += content
@@ -53,7 +54,7 @@ def refresh_template(template_name, running_refreshing, path):
     template = jinja2.Template("".join(lines))
     rendered_template = template.render(settings)
 
-    with open("./index.html", 'w') as f:
+    with open(os.path.join(path, "index.html"), 'w') as f:
         f.write(rendered_template)
     print("Template refreshed")
     running_refreshing.clear()
@@ -94,7 +95,7 @@ def main():
     path = "."
     template_name = "nlesc.template"
     server = livereload.Server()
-    server.watch(FOLDER)
+    server.watch(path)
 
     running_watch = threading.Event()
     running_watch.set()

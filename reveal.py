@@ -80,7 +80,7 @@ def run_cli(args: argparse.Namespace, config: Dict[str, Any]) -> None:
     watching.start()
 
     try:
-        server.serve(port=args.port)
+        server.serve(port=args.port, root=args.folder)
     except KeyboardInterrupt:
         pass
     finally:
@@ -125,18 +125,20 @@ def run_gui(args: argparse.Namespace, config: Dict[str, Any]) -> None:
             self.running_watch = threading.Event()
             self.running_refreshing = threading.Event()
             if app.state.get() == "valid path":
-                self.use_folder()
+                self.refresh_metadata()
 
         def run(self):
             print("run from outside")
+            self.use_folder()
             self.write_to_title_slide()
-            self.server.watch(app.presentation_path.get())
+            presentation_path: str = app.presentation_path.get()
+            self.server.watch(presentation_path)
             self.running_watch.set()
             template_file = \
                 os.path.join(BASE_DIRECTORY,
                              app.active_template.get() + ".template")
             self.watching = threading.Thread(target=watch_for_changes,
-                                             args=(app.presentation_path.get(),
+                                             args=(presentation_path,
                                                    template_file,
                                                    self.running_watch,
                                                    self.running_refreshing),
@@ -145,7 +147,8 @@ def run_gui(args: argparse.Namespace, config: Dict[str, Any]) -> None:
             port = app.port.get()
             self.serving_process = \
                 multiprocessing.Process(target=self.server.serve,
-                                        kwargs={"port": port})
+                                        kwargs={"port": port,
+                                                "root": presentation_path})
             self.serving_process.start()
 
         def stop(self):
@@ -159,16 +162,18 @@ def run_gui(args: argparse.Namespace, config: Dict[str, Any]) -> None:
 
         def refresh_metadata(self):
             print("refresh metadata from outside")
-            metadata_dict: Dict[str] = self.read_metadata()
-            app.title_string.set(metadata_dict["title"])
-            app.description_string.set(metadata_dict["description"])
-            app.author_string.set(metadata_dict["author"])
+            try:
+                metadata_dict: Dict[str] = self.read_metadata()
+                app.title_string.set(metadata_dict["title"])
+                app.description_string.set(metadata_dict["description"])
+                app.author_string.set(metadata_dict["author"])
+            except IndexError:
+                print("no metadata, since there are no files yet")
 
         def use_folder(self):
             print("using folder from outsite")
             self.place_reveal_folder()
             self.place_sample_files()
-            self.refresh_metadata()
 
         def get_title_slide(self):
             presentation_path: str = app.presentation_path.get()
