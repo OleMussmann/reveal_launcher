@@ -12,6 +12,7 @@ yaml2 = "*"
 [dev-packages]
 nuitka = "*"
 ordered-set = "*"
+pip-licenses = "*"
 
 [requires]
 python_version = "3.9"
