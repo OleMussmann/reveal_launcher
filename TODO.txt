@@ -11,6 +11,7 @@
 - fonts are sometimes inconsistent
 - add more templates
 - add app icon
+- change license to Apache 2.0?
 - bug: slides blink after first load
 - github actions for compilation
 - type hinting everywhere
