@@ -14,7 +14,10 @@ from typing import Any, Dict, List, TextIO
 
 from reveal_cli import watch_for_changes
 from reveal_gui import Gui
+from version import __version__
 
+
+NAME: str = "reveal launcher"
 
 CONFIG_FILE_NAME: str = "config.yaml"
 
@@ -45,10 +48,9 @@ def cli_args() -> argparse.Namespace:
     #parser.add_argument("--plugins",
     #                    action="store_true",
     #                    help="list available plugins and exit")
-    ## TODO
-    #parser.add_argument("-v", "--version",
-    #                    action="store_true",
-    #                    help="print %(prog)s version and exit")
+    parser.add_argument("-v", "--version",
+                        action="store_true",
+                        help="print %(prog)s version and exit")
     return parser.parse_args()
 
 
@@ -301,6 +303,10 @@ def run_gui(args: argparse.Namespace, config: Dict[str, Any]) -> None:
 
 def main() -> None:
     args: argparse.Namespace = cli_args()
+
+    if args.version:
+        print(NAME, __version__)
+        sys.exit()
 
     f: TextIO
     with open(os.path.join(BASE_DIRECTORY, CONFIG_FILE_NAME)) as f:
