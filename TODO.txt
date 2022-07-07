@@ -10,6 +10,7 @@
 - grey out "Run" when ports are wrong
 - fonts are sometimes inconsistent
 - add more templates
+- add app icon
 - bug: slides blink after first load
 - github actions for compilation
 - type hinting everywhere
