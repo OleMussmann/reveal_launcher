@@ -27,9 +27,6 @@ jobs:
     - name: Rename
       run: mv reveal_linux reveal_ubuntu-20.04
 
-    - name: Make executable
-      run: chmod a+x reveal_ubuntu-20.04
-
     - name: Run tests
       run: echo "TODO implement tests"
 
@@ -57,9 +54,6 @@ jobs:
 
     - name: Rename
       run: mv reveal_linux reveal_ubuntu-18.04
-
-    - name: Make executable
-      run: chmod a+x reveal_ubuntu-18.04
 
     - name: Run tests
       run: echo "TODO implement tests"
@@ -89,9 +83,6 @@ jobs:
     - name: Rename
       run: mv reveal_macos reveal_macos-big-sur-11
 
-    - name: Make executable
-      run: chmod a+x reveal_macos-big-sur-11
-
     - name: Run tests
       run: echo "TODO implement tests"
 
@@ -119,9 +110,6 @@ jobs:
 
     - name: Rename
       run: mv reveal_macos reveal_macos-catalina-10.15
-
-    - name: Make executable
-      run: chmod a+x reveal_macos-catalina-10.15
 
     - name: Run tests
       run: echo "TODO implement tests"
