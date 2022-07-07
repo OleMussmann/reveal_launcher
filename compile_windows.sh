@@ -13,4 +13,5 @@ yes Yes | python3 -m nuitka \
   --include-data-files=livereload.js=livereload/vendors/livereload.js \
   --enable-plugin=tk-inter \
   --onefile --standalone --remove-output \
+  --windows-disable-console \
   -o reveal.exe reveal.py
