@@ -4,6 +4,7 @@ import argparse
 import livereload
 import multiprocessing
 import os
+import platform
 import shutil
 import sys
 import threading
@@ -56,6 +57,7 @@ def cli_args() -> argparse.Namespace:
 
 def launched_from_terminal() -> bool:
     # https://stackoverflow.com/questions/9839240/how-to-determine-if-python-script-was-run-via-command-line
+    # TODO detect on Windows too
     if sys.stdin:
         print("is a tty? ", sys.stdin.isatty())
     else:
@@ -313,7 +315,11 @@ def main() -> None:
         # TODO use yatiml instead
         config: Dict[str, Any] = yaml.safe_load(f)
 
-    if launched_from_terminal() and not args.gui:
+    # Launched_from_terminal does not work on Windows. Until that is fixed, the
+    # Windows platform only gets the GUI.
+    if launched_from_terminal() \
+            and not args.gui \
+            and not platform.system() == 'Windows':
         run_cli(args=args, config=config)
     else:
         run_gui(args=args, config=config)
