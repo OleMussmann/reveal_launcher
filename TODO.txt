@@ -1,5 +1,6 @@
 - Fix Windows terminal thingy
 - Fix Windows not showing tooltips
+- Fix broken MacOS binary
 - error handling for user text input
 - error handling for title md file formating errors
 - documentation
@@ -7,6 +8,8 @@
   - bug: obscure! markdown headers have their title as ID and might interfere with html elements with the same ID; don't use keywords like blue_overlay as title
   - bug: code rendering only in .html files
 - fill help tab
+- add NOTICE to include reveal folder and dependencies
+- option to add license
 - remember plugin and version settings, if applicable
   - pull from 00 slide
 - safeguard index.html, reveal.js folder edits
