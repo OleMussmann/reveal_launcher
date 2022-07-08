@@ -1,4 +1,5 @@
 - Fix Windows terminal thingy
+- Fix Windows not showing tooltips
 - error handling for user text input
 - error handling for title md file formating errors
 - documentation
