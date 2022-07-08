@@ -20,6 +20,7 @@
     <!-- fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Assistant">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="reveal.js/{{ version }}/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
@@ -90,6 +91,7 @@
 
     <script src="reveal.js/{{ version }}/reveal.js/dist/reveal.js"></script>
     <script src="reveal.js/{{ version }}/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="reveal.js/{{ version }}/reveal.js/plugin/math/math.js"></script>
     <script src="reveal.js/{{ version }}/reveal.js/plugin/notes/notes.js"></script>
     <script src="reveal.js/{{ version }}/reveal.js/plugin/search/search.js"></script>
     <script src="reveal.js/{{ version }}/reveal.js/plugin/markdown/markdown.js"></script>
@@ -114,6 +116,9 @@
           markers: true,
           hideMissingTitles: true,
         },
+        dependencies: [
+          {src: 'reveal.js/{{ version }}/reveal.js-plugins/reveal.js-d3/reveald3.js'}
+        ],
         plugins: [ {{ plugins }} ]
       });
     </script>
@@ -148,10 +153,16 @@
         document.getElementById(style).style.opacity = 1;
       };
       var overview_shown = false;
+      function getOpacity(data_state) {
+        var opacity = 0.8;
+        for (let i = 0; i < 11; i++) {
+          if (data_state.includes(i)) { opacity = i/10; }
+        };
+        return opacity
+      };
       function addDecorations() {
         console.log("== set decorations ==")
         var currentSlide = Reveal.getCurrentSlide();
-        if (!currentSlide) return;
         console.log(currentSlide.querySelector("footer"));
         if (currentSlide.contains(currentSlide.querySelector('footer')))
         {
@@ -164,46 +175,42 @@
         };
         if ( currentSlide.getAttribute('data-state') )
         {
+          var data_state = currentSlide.getAttribute('data-state')
+          var opacity = getOpacity(data_state);
+          console.log("DS" + data_state)
           // pre-set slide designs
 
           // standard
-          if ( currentSlide.getAttribute('data-state').includes("standard"))
+          if ( data_state.includes("standard"))
           {
-            currentSlide.setAttribute('data-state',
-              currentSlide.getAttribute('data-state') +
-              " logo yellow_flag white_overlay");
+            data_state += " logo yellow_flag white_overlay";
           };
 
           // two_pane
-          if ( currentSlide.getAttribute('data-state').includes("two_pane"))
+          if ( data_state.includes("two_pane"))
           {
-            currentSlide.setAttribute('data-state',
-              currentSlide.getAttribute('data-state') +
-              " logo yellow_flag white_overlay blue_pane_right");
+            data_state += " logo yellow_flag white_overlay blue_pane_right";
           };
 
           // about
-          if ( currentSlide.getAttribute('data-state').includes("about"))
+          if ( data_state.includes("about"))
           {
-            currentSlide.setAttribute('data-state',
-              currentSlide.getAttribute('data-state') +
-              " logo white_overlay blue_pane_left purple_half_circle_top purple_strip_bottom yellow_half_strip");
+            data_state += " logo white_overlay blue_pane_left purple_half_circle_top purple_strip_bottom yellow_half_strip";
           };
 
           // touch
-          if ( currentSlide.getAttribute('data-state').includes("touch"))
+          if ( data_state.includes("touch"))
           {
-            currentSlide.setAttribute('data-state',
-              currentSlide.getAttribute('data-state') +
-              " logo blue_overlay touch_pane purple_blob right_e_bottom");
+            data_state += " logo blue_overlay touch_pane purple_blob right_e_bottom";
           };
 
           // individual elements
 
           // purple overlay
-          if ( currentSlide.getAttribute('data-state').includes("purple_overlay"))
+          if ( data_state.includes("purple_overlay"))
           {
-            document.getElementById("purple_overlay").style.opacity = .8;
+            document.getElementById("purple_overlay").style.opacity = opacity;
+            document.getElementById("purple_overlay").style.transform = "translateY(0)";
             document.getElementById("logo_color").style.opacity = 0;
             document.getElementById("logo_white").style.opacity = 0;
             document.getElementById("logo_part_white").style.opacity = 1;
@@ -215,9 +222,10 @@
           };
 
           // white overlay
-          if ( currentSlide.getAttribute('data-state').includes("white_overlay"))
+          if ( data_state.includes("white_overlay"))
           {
-            document.getElementById("white_overlay").style.opacity = .8;
+            document.getElementById("white_overlay").style.opacity = opacity;
+            document.getElementById("white_overlay").style.transform = "translateY(0)";
             document.getElementById("logo_color").style.opacity = 1;
             document.getElementById("logo_white").style.opacity = 0;
             document.getElementById("logo_part_white").style.opacity = 0;
@@ -229,9 +237,10 @@
           };
 
           // black overlay
-          if ( currentSlide.getAttribute('data-state').includes("black_overlay"))
+          if ( data_state.includes("black_overlay"))
           {
-            document.getElementById("black_overlay").style.opacity = .8;
+            document.getElementById("black_overlay").style.opacity = opacity;
+            document.getElementById("black_overlay").style.transform = "translateY(0)";
             document.getElementById("logo_color").style.opacity = 0;
             document.getElementById("logo_white").style.opacity = 0;
             document.getElementById("logo_part_white").style.opacity = 1;
@@ -243,9 +252,10 @@
           };
 
           // blue overlay
-          if ( currentSlide.getAttribute('data-state').includes("blue_overlay"))
+          if ( data_state.includes("blue_overlay"))
           {
-            document.getElementById("blue_overlay").style.opacity = .8;
+            document.getElementById("blue_overlay").style.opacity = opacity;
+            document.getElementById("blue_overlay").style.transform = "translateY(0)";
             document.getElementById("logo_color").style.opacity = 0;
             document.getElementById("logo_white").style.opacity = 1;
             document.getElementById("logo_part_white").style.opacity = 0;
@@ -257,7 +267,7 @@
           };
 
           // blue pane right
-          if ( currentSlide.getAttribute('data-state').includes("blue_pane_right"))
+          if ( data_state.includes("blue_pane_right"))
           {
             document.getElementById("blue_pane_right").style.opacity = 1;
             currentSlide.classList.remove("has-dark-background");
@@ -269,7 +279,7 @@
           };
 
           // blue pane left
-          if ( currentSlide.getAttribute('data-state').includes("blue_pane_left"))
+          if ( data_state.includes("blue_pane_left"))
           {
             document.getElementById("blue_pane_left").style.opacity = 1;
             setLogoStyle("logo_white");
@@ -282,7 +292,7 @@
           };
 
           // touch pane
-          if ( currentSlide.getAttribute('data-state').includes("touch_pane"))
+          if ( data_state.includes("touch_pane"))
           {
             document.getElementById("touch_pane").style.opacity = 1;
             setLogoStyle("logo_color");
@@ -295,7 +305,7 @@
           };
 
           // logo
-          if ( currentSlide.getAttribute('data-state').includes("logo"))
+          if ( data_state.includes("logo"))
           {
             document.getElementById("logo_color").style.left = 3 + "vw";
             document.getElementById("logo_part_white").style.left = 3 + "vw";
@@ -309,7 +319,7 @@
           };
 
           // yellow strip
-          if ( currentSlide.getAttribute('data-state').includes("yellow_strip"))
+          if ( data_state.includes("yellow_strip"))
           {
             document.getElementById("yellow_strip").style.left = 0;
             console.log("yellow_strip");
@@ -319,7 +329,7 @@
           };
 
           // yellow flag
-          if ( currentSlide.getAttribute('data-state').includes("yellow_flag"))
+          if ( data_state.includes("yellow_flag"))
           {
             document.getElementById("yellow_flag").style.left = 0;
             console.log("yellow_flag");
@@ -329,7 +339,7 @@
           };
 
           // purple half circle top
-          if ( currentSlide.getAttribute('data-state').includes("purple_half_circle_top"))
+          if ( data_state.includes("purple_half_circle_top"))
           {
             document.getElementById("purple_half_circle_top").style.top = 0;
             setLogoStyle("logo_part_white");
@@ -340,7 +350,7 @@
           };
 
           // purple half circle bottom
-          if ( currentSlide.getAttribute('data-state').includes("purple_half_circle_bottom"))
+          if ( data_state.includes("purple_half_circle_bottom"))
           {
             document.getElementById("purple_half_circle_bottom").style.bottom = 0;
             document.getElementById("yellow_flag").style.bottom = 20 + "vh";
@@ -352,7 +362,7 @@
           };
 
           // purple strip bottom
-          if ( currentSlide.getAttribute('data-state').includes("purple_strip_bottom"))
+          if ( data_state.includes("purple_strip_bottom"))
           {
             document.getElementById("purple_strip_bottom").style.bottom = 0;
             console.log("purple_strip_bottom");
@@ -362,7 +372,7 @@
           };
 
           // yellow_half_strip
-          if ( currentSlide.getAttribute('data-state').includes("yellow_half_strip"))
+          if ( data_state.includes("yellow_half_strip"))
           {
             document.getElementById("yellow_half_strip").style.bottom = 0;
             console.log("yellow_half_strip");
@@ -372,7 +382,7 @@
           };
 
           // purple blob
-          if ( currentSlide.getAttribute('data-state').includes("purple_blob"))
+          if ( data_state.includes("purple_blob"))
           {
             document.getElementById("purple_blob").style.top = 0;
             console.log("purple_blob");
@@ -382,18 +392,31 @@
           };
 
           // right_e
-          if ( currentSlide.getAttribute('data-state').includes("right_e_top"))
+          if ( data_state.includes("right_e_top"))
           {
             document.getElementById("right_e").style.top = 10 + "vh";
             document.getElementById("right_e").style.right = 0;
             console.log("right_e_top");
-          } else if ( currentSlide.getAttribute('data-state').includes("right_e_bottom")){
+          } else if ( data_state.includes("right_e_bottom")){
             document.getElementById("right_e").style.top = 60 + "vh";
             document.getElementById("right_e").style.right = 0;
             console.log("right_e_bottom");
           } else {
             document.getElementById("right_e").style.right = -4 + "vw";
             console.log("no right_e");
+          };
+
+          // clear the background so that the overlays don't interfere
+          // with underlying iframe
+          if ( data_state.includes("clear_background"))
+          {
+            document.getElementById("purple_overlay").style.transform = "translateY(100vh)";
+            document.getElementById("white_overlay").style.transform = "translateY(100vh)";
+            document.getElementById("black_overlay").style.transform = "translateY(100vh)";
+            document.getElementById("blue_overlay").style.transform = "translateY(100vh)";
+            document.getElementById("blue_pane_right").style.transform = "translateY(100vh)";
+            document.getElementById("blue_pane_left").style.transform = "translateY(100vh)";
+            document.getElementById("touch_pane").style.transform = "translateY(100vh)";
           };
         }
         else
