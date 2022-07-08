@@ -20,11 +20,10 @@
 - add app icon
 - change license to Apache 2.0?
 - bug: slides blink after first load
-- github actions for compilation
 - type hinting everywhere
 - code clean-up
 - missing cli options
-- bug: browser caching issues
+- bug: browser caching issues, sometimes the browser does not update the slide, even when files are edited. restarting the reveal helper _does not work_. it is a caching issue from the browser, but I have no clue how to solve that yet.
 - reveal chart colors
 - add plugins
   - seminar
@@ -35,6 +34,3 @@
 - Check vertical stretching for "reveal.js Version" and "Available Templates"
 - Helpful button tooltip if "Open Browser" is disabled
 - document tooltip.py changes (self.enabled, allow for dismissal)
-
-- repo for demo
-- repo for template
