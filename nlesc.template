@@ -82,11 +82,12 @@
             </div>
           </div>
           <img id="right_e" src="./files/letter-e.svg" style="transition: right 1s, top 1s; position: absolute; top: 10vh; right: -4vw; width: 4vw; z-index: 3;"></img>
+        </div>
       </div>
-    </div>
 
-    <div class="slides">
-      {{ slides }}
+      <div class="slides">
+        {{ slides }}
+      </div>
     </div>
 
     <script src="reveal.js/{{ version }}/reveal.js/dist/reveal.js"></script>
@@ -156,7 +157,7 @@
       function getOpacity(data_state) {
         var opacity = 0.8;
         for (let i = 0; i < 11; i++) {
-          if (data_state.includes(i)) { opacity = i/10; }
+          if (data_state.includes(i)) { opacity = i/10; console.log("opacity set to " + opacity)}
         };
         return opacity
       };
