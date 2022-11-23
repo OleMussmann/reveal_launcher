@@ -228,6 +228,12 @@ def run_gui(args: argparse.Namespace, config: Dict[str, Any]) -> None:
             active_plugins = [box.cget("text") for box in app.plugin_checkboxes
                               if box.state() == ('selected',)]
 
+            # If RevealMarkdown is active, it _must_ be the first plugin to
+            # load.
+            if "RevealMarkdown" in active_plugins:
+                active_plugins.remove("RevealMarkdown")
+                active_plugins = ["RevealMarkdown"] + active_plugins
+
             new_content: List[str] = [
                 "",
                 app.title_string.get(),
