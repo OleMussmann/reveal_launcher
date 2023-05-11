@@ -3,6 +3,7 @@ default_port: 8000
 warning_color: red
 
 all_plugins:
+  RevealChalkboard: "Draw on slides or canvas\nuse the pen menus on the bottom left"
   RevealHighlight: "Syntax highlighted code"
   RevealMarkdown: "Write content using Markdown"
   RevealMath.KaTeX: "Create beautiful LaTeX formulas"
@@ -13,6 +14,7 @@ all_plugins:
 
 reveal_specs:
   4.3.1:
+    - RevealChalkboard
     - RevealHighlight
     - RevealMarkdown
     - RevealMath.KaTeX
